@@ -46,7 +46,8 @@ if __name__ == "__main__":
     CSS ="""
     .contain { display: flex; flex-direction: column; }
     .gradio-container { height: 100vh !important; }
-    #component-7 { height: 100%; }
+    #component-9 { height: 75vh; }
+    
     #chatbot { flex-grow: 1; overflow: auto;}
     """
     # Create a Gradio interface
