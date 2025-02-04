@@ -46,7 +46,7 @@ if __name__ == "__main__":
     CSS ="""
     .contain { display: flex; flex-direction: column; }
     .gradio-container { height: 100vh !important; }
-    #component-0 { height: 100%; }
+    #component-7 { height: 100%; }
     #chatbot { flex-grow: 1; overflow: auto;}
     """
     # Create a Gradio interface
@@ -59,7 +59,7 @@ if __name__ == "__main__":
                 statusBox = gr.Chatbot(elem_id="chatbot")
                 model_dropdown.input(initialize_model, [model_dropdown], [statusBox])
             with gr.TabItem("Txt2Txt"):
-                txt2txt = gr.ChatInterface(fn=get_RKLLM_output, type="messages")
+                txt2txt = gr.ChatInterface(fn=get_RKLLM_output, type="messages", elem_id="chatbot")
             with gr.TabItem("Txt2Mesh"):
                 with gr.Row():    
                     with gr.Column(scale=2):
