@@ -43,15 +43,20 @@ if __name__ == "__main__":
         except RuntimeError as e:
             print(f"ERROR: {e}")
         return history
-
+    CSS ="""
+    .contain { display: flex; flex-direction: column; }
+    .gradio-container { height: 100vh !important; }
+    #component-0 { height: 100%; }
+    #chatbot { flex-grow: 1; overflow: auto;}
+    """
     # Create a Gradio interface
-    with gr.Blocks(title="Chat with RKLLM") as chatRKLLM:
+    with gr.Blocks(title="Chat with RKLLM", css=CSS) as chatRKLLM:
         available_models = available_models()
         gr.Markdown("<div align='center'><font size='10'> Definitely Not Skynet </font></div>")
         with gr.Tabs():
             with gr.TabItem("Select Model"):
                 model_dropdown = gr.Dropdown(choices=available_models, label="Select Model", value="None", allow_custom_value=True)
-                statusBox = gr.Chatbot(height=100)
+                statusBox = gr.Chatbot(elem_id="chatbot")
                 model_dropdown.input(initialize_model, [model_dropdown], [statusBox])
             with gr.TabItem("Txt2Txt"):
                 txt2txt = gr.ChatInterface(fn=get_RKLLM_output, type="messages")
