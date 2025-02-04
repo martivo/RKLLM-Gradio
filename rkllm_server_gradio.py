@@ -47,12 +47,12 @@ if __name__ == "__main__":
     with gr.Blocks(title="Chat with RKLLM", fill_height=True) as chatRKLLM:
         available_models = available_models()
         gr.Markdown("<div align='center'><font size='10'> Definitely Not Skynet </font></div>")
-        with gr.Tabs(scale=1):
+        with gr.Tabs():
             with gr.TabItem("Select Model"):
                 model_dropdown = gr.Dropdown(choices=available_models, label="Select Model", value="None", allow_custom_value=True)
                 statusBox = gr.Chatbot(elem_id="chatbot", autoscroll=True)
                 model_dropdown.input(initialize_model, [model_dropdown], [statusBox])
-            with gr.TabItem("Txt2Txt"):
+            with gr.TabItem("Txt2Txt", scale=2):
                 txt2txt = gr.ChatInterface(fn=get_RKLLM_output, type="messages", fill_height=True, autoscroll=True)
             with gr.TabItem("Txt2Mesh"):
                 with gr.Row():    
