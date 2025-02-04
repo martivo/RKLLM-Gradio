@@ -47,7 +47,7 @@ if __name__ == "__main__":
     with gr.Blocks(title="Chat with RKLLM", fill_height=True) as chatRKLLM:
         available_models = available_models()
         gr.Markdown("<div align='center'><font size='10'> Definitely Not Skynet </font></div>")
-        with gr.Tabs():
+        with gr.Tabs(scale=1):
             with gr.TabItem("Select Model"):
                 model_dropdown = gr.Dropdown(choices=available_models, label="Select Model", value="None", allow_custom_value=True)
                 statusBox = gr.Chatbot(elem_id="chatbot", autoscroll=True)
