@@ -173,7 +173,14 @@ class RKLLMLoaderClass:
                 user_prompt
             ]
         # print(prompt)
-        tokenizer = AutoTokenizer.from_pretrained(self.st_model_id, trust_remote_code=True)
+        TOKENIZER_PATH="%s/%s"%(MODEL_PATH,self.st_model_id.replace("/","-"))
+        if not os.path.exists(TOKENIZER_PATH):
+            print("Tokenizer not cached locally, downloading to %s"%TOKENIZER_PATH)
+            os.mkdir(TOKENIZER_PATH)
+            tokenizer = AutoTokenizer.from_pretrained(self.st_model_id, trust_remote_code=True)
+            tokenizer.save_pretrained(TOKENIZER_PATH)
+        else:
+            tokenizer = AutoTokenizer.from_pretrained(TOKENIZER_PATH, trust_remote_code=True)
         prompt = tokenizer.apply_chat_template(prompt, tokenize=True, add_generation_prompt=True)
         # response = {"role": "assistant", "content": "Loading..."}
         response = {"role": "assistant", "content": ""}
